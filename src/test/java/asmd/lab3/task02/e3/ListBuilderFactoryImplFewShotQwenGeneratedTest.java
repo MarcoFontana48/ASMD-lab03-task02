@@ -4,171 +4,117 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 public class ListBuilderFactoryImplFewShotQwenGeneratedTest {
-    
     private ListBuilderFactory factory;
     
-    @BeforeEach
+    @org.junit.Before
     public void initFactory() {
         this.factory = new ListBuilderFactoryImpl();
     }
     
-    @Test
+    @org.junit.Test
     public void testEmpty() {
-        // Test for an empty list builder
+        // empty() rappresenta il builder di una lista vuota
         ListBuilder<Integer> empty = this.factory.<Integer>empty();
         assertEquals(List.of(), empty.build());
         
-        // Test adding elements to an empty builder
-        assertEquals(List.of(10, 20),
-                empty.add(List.of(10, 20))
-                        .build());
+        // se gli aggiungo 10 e 20 diventa il builder di una lista (10, 20)
+        ListBuilder<Integer> expectedWithElements = this.factory.fromElement(10).add(this.factory.fromElement(20));
+        assertNotEquals(List.of(), expectedWithElements.build());
+        assertEquals(List.of(10, 20), expectedWithElements.build());
         
-        // Test multiple add operations
-        assertEquals(List.of(10, 20, 30),
-                empty.add(List.of(10, 20))
-                        .add(List.of(30))
-                        .build());
+        // posso fare due add consecutive, concatenando le chiamate
+        ListBuilder<Integer> expectedAddAdd = this.factory.empty().add(this.factory.fromElement(1)).add(this.factory.fromElement(2));
+        assertNotEquals(List.of(), expectedAddAdd.build());
+        assertEquals(List.of(1, 2), expectedAddAdd.build());
         
-        // Test concatenation with another builder
-        assertEquals(List.of(10, 20, 30),
-                empty.add(List.of(10, 20))
-                        .concat(empty.add(List.of(30)))
-                        .build());
+        // con la concat ottengo un builder che rappresenta la concatenazione delle liste
+        ListBuilder<Integer> expectedConcat = this.factory.empty().concat(this.factory.fromElement(1)).concat(this.factory.fromElement(2));
+        assertNotEquals(List.of(), expectedConcat.build());
+        assertEquals(List.of(1, 2), expectedConcat.build());
         
-        // Another concat example
-        assertEquals(List.of(10, 20, 30),
-                empty.add(List.of(10, 20))
-                        .concat(empty.add(List.of(30)))
-                        .build());
+        // altro esempio con la concat
+        ListBuilder<Integer> expectedConcatConcat = this.factory.empty().concat(this.factory.fromElement(1)).add(this.factory.fromElement(2));
+        assertNotEquals(List.of(), expectedConcatConcat.build());
+        assertEquals(List.of(1, 2), expectedConcatConcat.build());
+        
     }
     
-    @Test
+    @org.junit.Test
     public void testFromElement() {
-        // Test creating a builder with a single element
+        // fromElement() rappresenta il builder di una lista con un elemento
         ListBuilder<Integer> one = this.factory.fromElement(1);
+        assertNotEquals(List.of(), one.build());
         assertEquals(List.of(1), one.build());
         
-        // Test adding elements to the builder
-        assertEquals(List.of(1, 2, 3, 4),
-                one.add(List.of(2, 3, 4)).build());
+        ListBuilder<String> stringOne = this.factory.fromElement("1");
+        assertNotEquals(List.of(), stringOne.build());
+        assertEquals(List.of("1"), stringOne.build());
         
-        // Test concatenating with another builder
-        assertEquals(List.of(1, 2, 1),
-                one.concat(this.factory.fromElement(2))
-                        .concat(one)
-                        .build());
+        // concat con un singolo elemento
+        ListBuilder<Integer> expectedConcatWithSingleElement = this.factory.empty().concat(one);
+        assertNotEquals(List.of(), expectedConcatWithSingleElement.build());
+        assertEquals(List.of(1), expectedConcatWithSingleElement.build());
     }
     
-    @Test
+    @org.junit.Test
     public void testBasicFromList() {
-        // Test creating a builder from an existing list
+        // fromList() rappresenta il builder di una lista con n elementi
         ListBuilder<Integer> l = this.factory.fromList(List.of(1, 2, 3));
+        assertNotEquals(List.of(), l.build());
         assertEquals(List.of(1, 2, 3), l.build());
         
-        // Test concatenation of the builder with itself
-        assertEquals(List.of(1, 2, 3, 1, 2, 3),
-                l.concat(l).build());
+        // concat funzionano come ci si aspetta
+        ListBuilder<Integer> expectedConcat = this.factory.empty().concat(l).concat(this.factory.fromElement(4)).concat(l);
+        assertNotEquals(List.of(), expectedConcat.build());
+        assertEquals(List.of(1, 2, 3, 4, 1, 2, 3), expectedConcat.build());
         
-        // Test replaceAll operation, replacing 1 with -1 and -2
-        assertEquals(List.of(-1, -2, 2, 3, -1, -2, 2, 3),
-                l.concat(l)
-                        .replaceAll(1, this.factory.fromList(List.of(-1, -2)))
-                        .build());
+        // replaceAll qui rimpiazza gli "1" con coppie "-1, -2"
+        ListBuilder<Integer> expectedReplaceAll = this.factory.empty().concat(l).replaceAll(1, this.factory.fromList(List.of(-1, -2))).concat(l);
+        assertNotEquals(List.of(), expectedReplaceAll.build());
+        assertEquals(List.of(-1, -2, 2, 3, -1, -2, 2, 3), expectedReplaceAll.build());
         
-        // Test replaceAll with no match
-        assertEquals(List.of(1, 2, 3, 1, 2, 3),
-                l.concat(l)
-                        .replaceAll(10, this.factory.fromList(List.of(-1, -2)))
-                        .build());
+        // se non c'è match, la replaceAll non fa nulla
+        ListBuilder<Integer> expectedNoReplaceAll = this.factory.empty().concat(l).replaceAll(10, this.factory.fromList(List.of(-1, -2))).concat(l);
+        assertNotEquals(List.of(), expectedNoReplaceAll.build());
+        assertEquals(List.of(1, 2, 3, 1, 2, 3), expectedNoReplaceAll.build());
+        
     }
     
-    @Test
+    @org.junit.Test
     public void testReverseFromList() {
-        // Test reversing a list
+        // la reverse fa ottenere un builder che rappresenta la lista invertita
         ListBuilder<Integer> l = this.factory.fromList(List.of(1, 2, 3));
+        assertNotEquals(List.of(), l.build());
         assertEquals(List.of(1, 2, 3), l.build());
         
-        // Test reversing the list
-        assertEquals(List.of(3, 2, 1), l.reverse().build());
+        // reverse fa ottenere una nuova lista invertita
+        ListBuilder<Integer> reversedExpected = this.factory.empty().concat(l).reverse();
+        assertNotEquals(List.of(), reversedExpected.build());
+        assertEquals(List.of(3, 2, 1), reversedExpected.build());
         
-        // Test reversing twice, should return original order
-        assertEquals(List.of(1, 2, 3), l.reverse().reverse().build());
+        // reverse funziona correttamente su due volte
+        ListBuilder<Integer> doubleReverseExpected = this.factory.empty().concat(l).reverse().reverse();
+        assertNotEquals(List.of(), doubleReverseExpected.build());
+        assertEquals(List.of(1, 2, 3, 3, 2, 1), doubleReverseExpected.build());
         
-        // Test concatenating a reversed list with the original
-        assertEquals(List.of(1, 2, 3, 3, 2, 1),
-                l.reverse().reverse().concat(l.reverse()).build());
     }
     
-    @Test
+    @org.junit.Test
     public void testJoin() {
-        // Test join functionality with multiple list builders
-        assertEquals(List.of("(", "1", "2", "3", "4", ")"),
-                this.factory.join("(", ")",
-                        List.of(this.factory.fromElement("1"),
-                                this.factory.fromElement("2"),
-                                this.factory.fromList(List.of("3", "4")))).build());
-    }
-    
-    @Test
-    public void testReplaceAllWithEmptyList() {
-        // Test replaceAll with an empty list
-        ListBuilder<Integer> l = this.factory.fromList(List.of(1, 2, 3, 4));
-        ListBuilder<Integer> replaced = l.replaceAll(1, this.factory.empty());
-        assertEquals(List.of(2, 3, 4), replaced.build());
-    }
-    
-    @Test
-    public void testAddEmptyList() {
-        // Test adding an empty list should not affect the result
-        ListBuilder<Integer> l = this.factory.fromList(List.of(1, 2, 3));
-        assertEquals(List.of(1, 2, 3), l.add(List.of()).build());
-    }
-    
-    @Test
-    public void testAddNull() {
-        // Test adding null elements should not work (to check robustness)
-        assertThrows(NullPointerException.class, () -> {
-            this.factory.fromList(List.of(1, 2, 3)).add(null);
-        });
-    }
-    
-    @Test
-    public void testConcatWithEmpty() {
-        // Test concatenating with an empty builder
-        ListBuilder<Integer> l = this.factory.fromList(List.of(1, 2, 3));
-        assertEquals(List.of(1, 2, 3), l.concat(this.factory.empty()).build());
-    }
-    
-    @Test
-    public void testReverseEmptyList() {
-        // Test reversing an empty list
-        ListBuilder<Integer> empty = this.factory.empty();
-        assertEquals(List.of(), empty.reverse().build());
-    }
-    
-    @Test
-    public void testReverseSingleElementList() {
-        // Test reversing a single element list
-        ListBuilder<Integer> single = this.factory.fromElement(42);
-        assertEquals(List.of(42), single.reverse().build());
-    }
-    
-    @Test
-    public void testJoinWithEmptyLists() {
-        // Test join with empty list builders
-        assertEquals(List.of("start", "end"),
-                this.factory.join("start", "end", List.of(this.factory.empty(), this.factory.empty())).build());
-    }
-    
-    @Test
-    public void testJoinWithNullElement() {
-        // Test join with null element (expect NullPointerException)
-        assertThrows(NullPointerException.class, () -> {
-            this.factory.join(null, "end", List.of(this.factory.fromElement("1"))).build();
-        });
+        // la join è usabile per concatenare più builder, con un elemento iniziale y uno finale
+        ListBuilder<String> expectedJoin = this.factory.join("(", ")");
+                                          .concat(this.factory.fromElement("1"))
+                .concat(this.factory.fromElement("2"))
+                .concat(this.factory.fromList(List.of("3", "4")));
+        assertNotEquals(List.of(), expectedJoin.build());
+        assertEquals(List.of("(", "1", "2", "3", "4", ")"), expectedJoin.build());
+        
+        // Test with a different list of elements
+        ListBuilder<String> anotherExpectedJoin = this.factory.join("(", ")");
+                                          .concat(this.factory.fromList(List.of("5", "6")))
+                .concat(this.factory.fromList(List.of("7", "8")));
+        assertNotEquals(List.of(), anotherExpectedJoin.build());
+        assertEquals(List.of("(", "5", "6", "7", "8", ")"), anotherExpectedJoin.build());
     }
 }

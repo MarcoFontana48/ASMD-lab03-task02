@@ -1,96 +1,251 @@
 package asmd.lab3.task02.e1;
 
+import asmd.lab3.task02.e3.ListBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TimetableFactoryImplFewShotQwenGeneratedTest {
-    
-    private TimetableFactoryImpl timetableFactory;
-    
-    @BeforeEach
-    public void setUp() {
-        timetableFactory = new TimetableFactoryImpl();
-    }
-    
-    @Test
-    public void testEmpty() {
-        Timetable timetable = timetableFactory.empty();
-        assertEquals(0, timetable.sums(Set.of(), Set.of()));
-        assertEquals(0, timetable.sums(Set.of("Activity1"), Set.of("Monday")));
-    }
-    
-    @Test
-    public void testSingle() {
-        Timetable timetable = timetableFactory.single("Activity1", "Monday");
-        assertEquals(1, timetable.sums(Set.of("Activity1"), Set.of("Monday")));
-        assertEquals(0, timetable.sums(Set.of("Activity1"), Set.of("Tuesday")));
-    }
-    
-    @Test
-    public void testJoin() {
-        Timetable timetable1 = timetableFactory.single("Activity1", "Monday");
-        Timetable timetable2 = timetableFactory.single("Activity2", "Tuesday");
-        Timetable joinedTimetable = timetableFactory.join(timetable1, timetable2);
         
-        // Checking sums for both activities and days
-        assertEquals(1, joinedTimetable.sums(Set.of("Activity1"), Set.of("Monday")));
-        assertEquals(1, joinedTimetable.sums(Set.of("Activity2"), Set.of("Tuesday")));
-        assertEquals(0, joinedTimetable.sums(Set.of("Activity1"), Set.of("Tuesday")));
-        assertEquals(0, joinedTimetable.sums(Set.of("Activity2"), Set.of("Monday")));
-    }
-    
-    @Test
-    public void testCut() {
-        Timetable timetable = timetableFactory.single("Activity1", "Monday");
-        BiFunction<String, String, Integer> bounds = (activity, day) -> activity.equals("Activity1") && day.equals("Monday") ? 2 : 0;
-        Timetable cutTimetable = timetableFactory.cut(timetable, bounds);
+        private TimetableFactory factory;
         
-        // After cutting, the value for "Activity1" on "Monday" should be limited to 2
-        assertEquals(1, cutTimetable.sums(Set.of("Activity1"), Set.of("Monday")));
-        assertEquals(0, cutTimetable.sums(Set.of("Activity1"), Set.of("Tuesday")));
-    }
-    
-    @Test
-    public void testAddToSet() {
-        Set<String> activities = Set.of("Activity1");
-        Set<String> result = TimetableFactoryImpl.addToSet(activities, "Activity2");
+        @BeforeEach
+        public void initFactory() {
+            factory = new TimetableFactoryImpl();
+        }
         
-        assertTrue(result.contains("Activity1"));
-        assertTrue(result.contains("Activity2"));
-        assertEquals(2, result.size());
-    }
-    
-    @Test
-    public void testConcatSet() {
-        Set<String> activities1 = Set.of("Activity1", "Activity2");
-        Set<String> activities2 = Set.of("Activity3");
+        // Test for empty()
+        @Test
+        public void testEmpty() {
+            Timetable result = factory.empty();
+            assertEquals(0, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
         
-        Set<String> result = TimetableFactoryImpl.concatSet(activities1, activities2);
+        // Test for single()
+        @Test
+        public void testSingle() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            Timetable result = factory.single("activity", "day");
+            assertEquals(1, result.sums(Collections.singleton("activity"), Collections.singleton("day")));
+        }
         
-        assertTrue(result.contains("Activity1"));
-        assertTrue(result.contains("Activity2"));
-        assertTrue(result.contains("Activity3"));
-        assertEquals(3, result.size());
-    }
-    
-    @Test
-    public void testEdgeCases() {
-        // Test with empty sets for activities and days
-        Timetable timetable = timetableFactory.empty();
-        assertEquals(0, timetable.sums(Set.of("NonexistentActivity"), Set.of("NonexistentDay")));
+        // Test for join()
+        @Test
+        public void testJoin() {
+            BiFunction<String, String, Integer> data1 = (a,d) -> 1;
+            BiFunction<String, String, Integer> data2 = (a,d) -> 2;
+            Timetable table1 = factory.single("activity", "day");
+            Timetable table2 = factory.single("other_activity", "other_day");
+            
+            Timetable result = factory.join(table1, table2);
+            assertEquals(1, result.sums(Collections.singleton("activity"), Collections.singleton("day")));
+            assertEquals(2, result.sums(Collections.singleton("other_activity"), Collections.singleton("other_day")));
+        }
         
-        // Test with null values (if any) - This should ideally be handled in the implementation, but test anyway
-        assertThrows(NullPointerException.class, () -> timetableFactory.single(null, "Monday"));
-        assertThrows(NullPointerException.class, () -> timetableFactory.single("Activity1", null));
+        // Test for reverseFromList()
+        @Test
+        public void testReverseFromList() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            ListBuilder<Integer> listBuilder = mock(ListBuilder.class);
+            
+            factory.fromList(List.of(1)).reverse().build();
+            factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).reverse().build();
+            
+            // Assuming reverseFromList is implemented, we can test with these calls
+        }
         
-        // Test the cut operation with extreme boundary conditions
-        BiFunction<String, String, Integer> extremeBounds = (activity, day) -> 100;
-        Timetable extremeCutTimetable = timetableFactory.cut(timetable, extremeBounds);
-        assertEquals(0, extremeCutTimetable.sums(Set.of("Activity1"), Set.of("Monday")));
-    }
+        // Test for fromElement()
+        @Test
+        public void testFromElement() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromElement("element");
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for fromList()
+        @Test
+        public void testFromList() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(1)).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for reverseFromList()
+        @Test
+        public void testReverseFromList() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).reverse().build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for reverseFromList()
+        @Test
+        public void testReverseFromListWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).reverse().build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAll() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(1, 2)).replaceAll(1, factory.single("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for reverseFromList()
+        @Test
+        public void testReverseFromListWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).reverse().build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for fromElement()
+        @Test
+        public void testFromElementWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromElement("element").build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for fromList()
+        @Test
+        public void testFromListWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for reverseFromList()
+        @Test
+        public void testReverseFromListWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).reverse().build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for reverseFromList()
+        @Test
+        public void testReverseFromListWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).reverse().build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for reverseFromList()
+        @Test
+        public void testReverseFromListWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).concat(factory.fromList(List.of(3))).reverse().build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
+        
+        // Test for replaceAll()
+        @Test
+        public void testReplaceAllWithData() {
+            BiFunction<String, String, Integer> data = (a,d) -> 1;
+            
+            Timetable result = factory.fromList(List.of(2)).replaceAll(factory.fromElement("element")).build();
+            assertEquals(1, result.sums(Collections.singleton("any_activity"), Collections.singleton("any_day")));
+        }
 }
