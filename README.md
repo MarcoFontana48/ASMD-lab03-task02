@@ -1,8 +1,7 @@
 # Task 02 - Test generation
 
 ## Zero shot - e1
-
-### Qwen 2.5:3b
+I have asked 2 models the same question:
 
 Q:
 
@@ -86,6 +85,8 @@ public class TimetableFactoryImpl implements TimetableFactory {
 }
 "
 ```
+
+### ChatGPT 3.5
 
 A:
 ```java
@@ -406,9 +407,477 @@ them fails. This way, you can see all the failures at once instead of stopping a
 
 No other changes were necessary to run tests, as they already covered all methods, edge cases, and possible outcomes.
 
-## Zero shot - e2
+### Smollm 360m
 
-### Qwen 2.5:3b
+A:
+```java
+import java.util.*;
+import java.util.function.*;
+
+public class TimetableFactoryImpl implements Timetable as.Timetable {
+    private static final int NUM_ACTIVITIES = 10; // number of activities
+
+    private static final int NUM_DAYS = 24 * NUM_ACTIVITIES; // number of days in a week
+
+    private static final int NUM_Hours = NUM_DAYS * NUM_ACTIVITIES; // total number of hours per day
+
+    private static class TimetableData {
+        private Set<String> activities, days;
+
+        public TimetableData(Set<String> activities, Set<String> days) {
+            this.activities = activities;
+            this.days = days;
+        }
+
+        private static class BiFunction {
+            private String data, day;
+
+            public BiFunction(String activity, String day) {
+                data = data + day;
+                day = day + 1;
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        private static class BiPredicate {
+            private String activity, day;
+
+            public BiPredicate() {
+                this.activity = "activities";
+                this.day = 0;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        private static class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        private static class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        private static class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        private static class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        private static class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        private static class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+
+        class BiPredicateBi as.Timetable {
+            private int id, data, day;
+
+            public BiPredicateBi() {
+                id = 0;
+                data = "activities";
+                day = 1;
+            }
+
+            public void test(Data<String, String> data, Data<String, String> day) {
+                if (data.equals("activities")) {
+                    return true;
+                } else if (day == 1) {
+                    return false;
+                } else {
+                    return day == 0;
+                }
+            }
+
+            public void apply(Data<String, String> data, Data<String, String> day) {
+                this.id = id;
+                this.data = data;
+                this.day = day;
+            }
+        }
+    </class>
+</template>
+```
+
+The generated code is not a test class and repeats itself many times, producing always the same code, plus it ends
+with HTML tags.
+
+This is unusable and has to be rewritten entirely from scratch.
+
+## Zero shot - e2
+I have asked 2 models the same question:
+
+Q: 
+```text
+considering this class in java, i need you to generate tests that cover all methods, edge cases and all possible outcomes "package asmd.lab3.task02.e2;
+
+import java.util.*;
+import java.util.stream.*;
+
+import java.util.function.*;
+
+public class TimeSheetFactoryImpl implements TimeSheetFactory {
+
+    // An implementation of a Timetable as an immutable class with activities, days, and an association of activities+days to hours
+    // Since it is immutable, we use a record, which automatically gives fields, getters, constructors, hashcode, equals, toString.
+    private static record TimeSheetData(List<String> activities, List<String> days, BiFunction<String, String, Integer> fun) implements TimeSheet {
+
+        @Override
+        public Map<String, Integer> sumsPerActivity() {
+            return activities.stream()
+                    .map(act -> new Pair<>(act, days.stream()
+                            .map(day -> fun.apply(act,day))
+                            .collect(Collectors.summingInt(i->i))))
+                    .collect(Collectors.toMap(Pair::get1, Pair::get2));
+        }
+
+        @Override
+        public Map<String, Integer> sumsPerDay() {
+            return days.stream()
+                    .map(day -> new Pair<>(day,activities.stream()
+                            .map(act -> fun.apply(act,day))
+                            .collect(Collectors.summingInt(i->i))))
+                    .collect(Collectors.toMap(Pair::get1, Pair::get2));
+        }
+
+        @Override
+        public int getSingleData(String activity, String day) {
+            return activities.contains(activity) && days.contains(day) ? fun.apply(activity,day) : 0;
+        }
+    }
+
+    private static List<String> createActivities(int numActivities){
+        return Stream.iterate(1, i -> i + 1).map(i -> "act"+i).limit(numActivities).collect(Collectors.toList());
+    }
+
+    private static List<String> createDays(int numDays){
+        return Stream.iterate(1, i -> i + 1).map(i -> "day"+i).limit(numDays).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public TimeSheet flat(int numActivities, int numDays, int hours) {
+        var activities = createActivities(numActivities);
+        var days = createDays(numDays);
+        return new TimeSheetData(
+            activities,
+            days, 
+            (a,d) -> hours);
+    }
+
+    @Override
+    public TimeSheet ofRawData(int numActivities, int numDays, List<Pair<Integer, Integer>> data) {
+        var activities = createActivities(numActivities);
+        var days = createDays(numDays);
+        return new TimeSheetData(
+            activities,
+            days, 
+            (a,d) -> (int)data.stream().filter(p -> p.get1().equals(activities.indexOf(a)) && p.get2().equals(days.indexOf(d))).count());
+    }
+
+    @Override
+    public TimeSheet ofListsOfLists(List<String> activities, List<String> days, List<List<Integer>> data) {
+        return new TimeSheetData(
+            List.copyOf(activities),
+            List.copyOf(days), 
+            (a,d) -> data.get(activities.indexOf(a)).get(days.indexOf(d)));
+    }
+
+    @Override
+    public TimeSheet ofPartialMap(List<String> activities, List<String> days, Map<Pair<String, String>, Integer> data) {
+        return new TimeSheetData(
+            List.copyOf(activities),
+            List.copyOf(days), 
+            (a,d) -> data.getOrDefault(new Pair<>(a,d),0));
+    }
+}
+"
+```
+
+### ChatGPT 3.5
 
 A:
 
@@ -568,9 +1037,109 @@ Also, it uses the 'assertAll' method so that the test will be executed fully eve
 
 No other changes were necessary to run tests, as they already covered all methods, edge cases, and possible outcomes.
 
-## Zero shot - e3
+### Smollm 360m
 
-### Qwen 2.5:3b
+A:
+```java
+import java.util.function.BiFunction;
+import java.util.stream.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class TimeSheetFactoryImpl implements TimeSheetFactory {
+    private static final String TIME_SHEET_ID = "time-sheet";
+
+    public TimeSheetFactory() {
+        // An implementation of a Timetable as an immutable class with activities, days, and an association of activities+days to hours
+        private class TimerTable implements TimerTable {
+            private static final int NUM_ACTIONS = 10;
+            private static final int NUM_DAYS = 5;
+
+            public TimerTable(int numActions) {
+                this.NUM_ACTIONS = numActions
+            }
+
+            @Override
+            public Map<String, Integer> sumsPerActivity() {
+                return new Map<>();
+                for (int i = 0; i < NUM_ACTIONS; ++i) {
+                    int activityId = i % NUM_ACTIONS;
+                    int daysInActivity = i / NUM_ACTIONS;
+                    int sumOfActivities = 0;
+                    for (int day = 1; day <= daysInActivity; ++day) {
+                        int activityId = day % NUM_DAYS;
+                        int hours = day / NUM_DAYS;
+
+                        if (activityId == 0) {
+                            int remainingHours = 0;
+                            int totalHours = 0;
+                            for (int dayToRun = 1; dayToRun <= daysInActivity; ++dayToRun) {
+                                int remainingHours += hours;
+                            }
+                            int remainingHours %= NUM_DAYS;
+                            int remainingDays = remainingHours - daysInActivity;
+
+                            if (remainingHours == 0) {
+                                int remainingHours = 0;
+                            } else {
+                                int remainingHours += remainingDays;
+                            }
+
+                            int sumOfActivities = activityId + remainingHours;
+                            int totalHours += hours;
+                            int sumOfEvents = activityId + remainingHours - daysInActivity;
+                            int totalEvents = remainingHours - daysToRun;
+
+                            if (sumOfEvents == 0) {
+                                int sumOfEvents = 0;
+                            } else {
+                                int sumOfEvents += remainingHours;
+                            }
+
+                            int remainingDays = remainingHours % NUM_DAYS;
+                            int remainingHours -= remainingDays;
+                            int remainingHours += remainingDays - daysToRun;
+
+                            int totalHours += hours + remainingHours;
+                            int totalEvents += remainingHours + remainingDays;
+
+                            int sumOfActivities = activityId + remainingHours;
+                            int sumOfEvents = activityId + remainingHours - daysInActivity;
+                            int sumOfEvents += remainingHours + remainingDays;
+
+                            int sumOfEvents += remainingHours + remainingDays;
+                            int sumOfEvents += remainingHours + remainingDays;
+
+                            int sumOfActivities += remainingHours + remainingDays;
+                            int sumOfEvents += remainingHours + remainingDays;
+
+                            if (remainingHours == 0) {
+                                int sumOfEvents = 0;
+                            } else {
+                                int sumOfEvents += remainingHours;
+                            }
+
+                        }
+
+                        int totalHoursInDay = hours * NUM_DAYS;
+                        int totalEventsInDay = days * NUM_DAYS;
+
+                        int sumOfActivities += totalHoursInDay + totalEvents;
+                        int sumOfEvents += totalHoursInDay + totalEvents;
+
+                        return new TimerTable(sumOfActivities, sumOfEvents);
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+The generated test class is not a test class and cannot be used as one, it has to be rewritten from scratch.
+
+## Zero shot - e3
+I have asked 2 models the same question:
 
 Q:
 ```text
@@ -650,6 +1219,8 @@ public class ListBuilderFactoryImpl implements ListBuilderFactory {
 }
 "
 ```
+
+### ChatGPT 3.5
 
 A:
 ```java
@@ -783,9 +1354,71 @@ public class ListBuilderFactoryImplZeroShotQwenGeneratedTest {
 The generated tests cover 100% of the code, including edge cases and standard scenarios.
 No more changes were necessary to run tests.
 
-## Few shot - e1
+### Smollm 360m
 
-### Qwen 2.5:3b
+A:
+```java
+import java.util.function.Function;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.util.stream.Map<T, List<T>>;
+import java.util.stream.List<T>;
+
+public class ListBuilderFactoryImpl implements ListBuilderFactory {
+    private static final String TYPE_LIST = "list";
+
+    public ListBuilderFactory ImplementsListBuilder(Type type) {
+        return new ListBuilderFactoryImpl(type);
+    }
+
+    public ListBuilderFactory ImplementsListBuilder(Type type, List<T> list) {
+        return new ListBuilderFactoryImpl(type, list);
+    }
+
+    private static class ListBuilderFactoryImpl implements ListBuilderFactory {
+
+        private static final String TYPE_LIST = "list";
+        private static final List<T> list = new ArrayList();
+
+        public ListBuilderFactory ImplementsListBuilder(Type type, List<T> list) {
+            return new ListBuilderFactoryImpl(type, list);
+        }
+    }
+
+    private static class ListBuilderFactoryImpl implements ListBuilderFactory {
+        private static final String TYPE_LIST = "list";
+        private static final List<T> list = new ArrayList();
+
+        public ListBuilderFactory ImplementsListBuilder(Type type, List<T> list) {
+            return new ListBuilderFactoryImpl(type, list);
+        }
+    }
+
+    private static class ListBuilderFactoryImpl implements ListBuilderFactory {
+        private static final String TYPE_LIST = "list";
+        private static final List<T> list = new ArrayList();
+
+        public ListBuilderFactory ImplementsListBuilder(Type type, List<T> list) {
+            return new ListBuilderFactoryImpl(type, list);
+        }
+    }
+
+    private static class ListBuilderFactoryImpl implements ListBuilderFactory {
+        private static final String TYPE_LIST = "list";
+        private static final List<T> list = new ArrayList();
+
+        public ListBuilderFactory ImplementsListBuilder(Type type, List<T> list) {
+            return new ListBuilderFactoryImpl(type, list);
+        }
+    }
+}
+```
+
+The generated test class is not a test class and it also presents many errors up to a point where it is completely 
+unusable and has to be rewritten manually from scratch.
+
+## Few shot - e1
+I have asked 2 models the same question:
 
 Q:
 ```text
@@ -966,8 +1599,9 @@ public class Test {
 }"
 ```
 
-A:
+### ChatGPT 3.5
 
+A:
 ```java
 package asmd.lab3.task02.e1;
 
@@ -1075,11 +1709,58 @@ assertions are executed even if one of them fails.
 However a couple of tests have a wrong expected value, for example the test testCut and testEdgeCases that should
 have the expected value of 1 instead of 2 and 0 instead of 100 respectively.
 
-So a small human intervention was needed to fix the expected values of those tests.
+So a small human intervention was needed to fix the expected values of those tests and to use the `assertAll` method
+
+### Smollm 360m
+
+A:
+```java
+import org.junit.Test;
+import org.junit.runner.UnitTestResults;
+import org.junit. runners.JUnit4Runner;
+import org.junit.runner.runner.Runnermethods;
+import org.junit.runner.runner.runner.Runnermethods;
+import org.junit.runner.runner.runner.runner.Runner;
+import org.junit.runner.runner.runner.runner.runner.RunnerTestResult;
+
+public class TestJoin {
+    private Runnermethods runner;
+
+    public static void testJoin(Runnermethods runner) {
+        // Create a new test case
+        Runnermethods.new()
+                .setName("join")
+                .setClass("test_join", "TestJoin");
+
+        // Call the test method
+        TestJoin.testJoin(runner);
+    }
+
+    public static void main(String[] args) {
+        // Create a new class to represent the joiner
+        Class<?=Runnermethods.class> joiner = new Class<?=Runnermethods.class>();
+
+        // Call the test method
+        TestJoin.testJoin(runner);
+    }
+}
+```
+
+The provided test class is not complete and does not cover all methods, edge cases, and possible outcomes.
+It's a basic starting point, not at all a complete test suite and it also has a couple of errors like:
+
+```java
+Runnermethods.new()
+        .setName("join")
+        .setClass("test_join", "TestJoin");
+```
+
+Where the 'new' keyword is used as method.
+So huge human intervention is needed to fix the test class to the point where the generated test class is useless and
+has to be rewritten from scratch.
 
 ## Few shot - e2
-
-### Qwen 2.5:3b
+I have asked 2 models the same question:
 
 Q:
 ```text
@@ -1254,8 +1935,9 @@ This is a test class that you can use as reference to generate a new class for t
 "
 ```
 
-A:
+### ChatGPT 3.5
 
+A:
 ```java
 package asmd.lab3.task02.e2;
 
@@ -1434,10 +2116,38 @@ assertions are executed even if one of them fails.
 
 No more changes were necessary to run tests.
 
+### Smollm 360m
+
+A:
+```python
+def get_average_duration(data):
+    if not isinstance(data, list) or len(data) == 0:
+        raise ValueError("Input must be a list of dictionaries.")
+
+    data = [dict(d) for d in data]
+    average_duration = sum(d.get("duration", 0) for d in data) / len(data)
+    return f"Average duration is {average_duration:.2f} seconds."
+```
+
+Since the first reply was in python instead of java, i asked the same question a second time, to which it replied again
+in python:
+
+A:
+```python
+import json
+
+def get_data(data):
+    if isinstance(data, dict):
+        return {key: data[key] for key in data.keys()}
+    elif isinstance(data, list):
+        return [get_data(item) for item in data]
+    else:
+        raise TypeError("Input must be a dictionary or a list.")
+```
+
+Since it keeps generating a python responses I haven't asked it to this model again.
+
 ## Few shot - e3
-
-### Qwen 2.5:3b
-
 Q:
 ```text
 considering this class in java, i need you to generate tests using JUnit5 that cover all methods, edge cases and all possible outcomes "package asmd.lab3.task02.e3;
@@ -1615,8 +2325,9 @@ public class Test {
 }"
 ```
 
-A:
+### ChatGPT 3.5
 
+A:
 ```java
 package asmd.lab3.task02.e3;
 
@@ -1823,3 +2534,88 @@ public void testJoinWithNullElement() {
     );
 }
 ```
+
+### Smollm 360m
+
+A:
+```python
+import unittest
+from unittest.mock import patch
+
+class TestJoin(unittest.TestCase):
+    @patch('os.path.join')
+    def test_join(self, mock_join):
+        mock_join.side_effect = lambda x: f"({x})"
+        self.assertEqual(join("1", "2", "3"), "1")
+        self.assertEqual(join("4", "5", "6"), "7")
+
+class TestJoinWithReversal(unittest.TestCase):
+    @patch('os.path.join')
+    def test_join_reversed(self, mock_join):
+        mock_join.side_effect = lambda x: f"({x})"
+        self.assertEqual(join("1", "2", "3"), "1")
+        self.assertEqual(join("4", "5", "6"), "7")
+
+class TestJoinWithReversalAndCombiner(unittest.TestCase):
+    @patch('os.path.join')
+    def test_join_combiner(self, mock_join):
+        mock_join.side_effect = lambda x: f"({x})"
+        self.assertEqual(join("1", "2", "3"), "1")
+        self.assertEqual(join("4", "5", "6"), "7")
+
+class TestJoinAndCombiner(unittest.TestCase):
+    @patch('os.path.join')
+    def test_join_and_combiner(self, mock_join):
+        mock_join.side_effect = lambda x: f"({x})"
+        self.assertEqual(join("1", "2", "3"), "1")
+        self.assertEqual(join("4", "5", "6"), "7")
+
+class TestJoinAndCombinerWithReversal(unittest.TestCase):
+    @patch('os.path.join')
+    def test_join_and_combiner(self, mock_join):
+        mock_join.side_effect = lambda x: f"({x})"
+        self.assertEqual(join("1", "2", "3"), "1")
+        self.assertEqual(join("4", "5", "6"), "7")
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+Since the response is once again in python I rebooted the model and asked it again the same question, but another 
+response in python was received:
+
+A:
+```python
+import unittest
+from unittest.mock import patch
+
+class TestTestClass(unittest.TestCase):
+    def test_empty(self):
+        factory = TestFactory()
+        self.assertEqual(factory.fromElement("1"), "1")
+        self.assertEqual(factory.fromElement(2), "2")
+        self.assertEqual(factory.fromList([3, 4]), [3, 4])
+
+    def test_add(self):
+        factory = TestFactory()
+        self.assertEqual(factory.fromElement(5).build(), "10")
+        self.assertEqual(factory.fromElement(6).build(), "20")
+        self.assertEqual(factory.fromList([7, 8]).build(), [14, 22])
+
+    def test_concat(self):
+        factory = TestFactory()
+        self.assertEqual(factory.fromElement("1").build(), "1")
+        self.assertEqual(factory.fromElement(2).build(), "2")
+        self.assertEqual(factory.fromList([3, 4]).build(), [6, 9])
+
+    def test_join(self):
+        factory = TestFactory()
+        self.assertEqual(factory.fromElement("1").join(), "1")
+        self.assertEqual(factory.fromElement(2).join(), "2")
+        self.assertEqual(factory.fromList([3, 4]).join(), ["3", "4"])
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+Since it keeps generating python responses I haven't asked it to this model again.
