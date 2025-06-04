@@ -2666,3 +2666,5 @@ A small human intervention is still required to fix the generated code.
 The generated code is not perfect and requires some human intervention to be usable, but it is a good starting point.
 Using the Few Shot approach, the generated code is more usable and requires less human intervention compared to 
 the Zero Shot approach that in some cases generated completely wrong responses not even in Java and not even about tests.
+The new tests occasionally maintain the coverage and quality of the original tests, using prompting strategies improves
+this a bit, but it's still far from the original tests created by humans.
